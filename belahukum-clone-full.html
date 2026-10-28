@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BELA – Teman Hukum Kamu (full clone)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0d2154;--mid:#1a3a6b;--soft:#93c5fd;--accent:#e8960a;--ink:#111827;--body:#374151;--strong:#1f2937;--muted:#6b7280;--faint:#9ca3af;--line:#e5e7eb;--line2:#f3f4f6;--app:#eef2f8;--page:#f8fafc;--ok:#059669;--okbg:#f0fdf4;--okb:#d1fae5;--okt:#065f46;--danger:#dc2626;--dbg:#fef2f2;--db:#fecaca;--dt:#991b1b;--notice:#fef3dc}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;background:var(--app);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{border:0;background:none;cursor:pointer}
+.app{display:flex;flex-direction:column;height:100dvh;background:#fff;max-width:1100px;margin:0 auto;position:relative;overflow:hidden}
+.view{flex:1;display:flex;flex-direction:column;min-height:0}
+.scroll{flex:1;overflow-y:auto;background:var(--page)}
+.pad{padding:12px 16px 20px}
+/* home header */
+.top{background:#fff;padding:12px 16px}
+.top-row{display:flex;align-items:center;justify-content:space-between;height:36px;margin-top:-12px}
+.logo{height:36px;width:auto;display:block}
+.quota{display:flex;align-items:center;gap:6px;background:var(--okbg);border:1px solid var(--okb);border-radius:99px;padding:4px 10px;font-size:10px;font-weight:600;color:var(--okt)}
+.quota i{width:6px;height:6px;border-radius:50%;background:#10b981}
+.bell{width:28px;height:28px;border-radius:50%;background:var(--line2);display:grid;place-items:center;margin-left:8px}
+.bell svg{width:14px;height:14px}
+.right{display:flex;align-items:center}
+.hello{font-size:12px;color:var(--faint);margin-top:12px}
+.name{font-size:20px;font-weight:800;margin-top:2px}
+/* navy header */
+.nh{background:var(--primary);color:#fff;padding:14px 16px 14px;flex-shrink:0}
+.nh h1{font-size:17px;font-weight:800}
+.nh p{font-size:11px;color:var(--soft);margin-top:3px}
+.nh .back{display:flex;align-items:center;gap:12px}
+.nh .back button{color:#fff;font-size:18px;line-height:1}
+.nh.big{padding-bottom:18px}
+.nh .sub2{font-size:15px;font-weight:800;margin-top:14px}
+/* tabs */
+.tabs{display:flex;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;flex-shrink:0}
+.tabs button{padding:12px 14px;font-size:12px;font-weight:600;color:var(--faint);white-space:nowrap;border-bottom:2px solid transparent}
+.tabs button.on{color:var(--primary);border-color:var(--primary)}
+/* generic */
+.sec{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px}
+.sec h3{font-size:16px;font-weight:700}
+.see{font-size:12px;font-weight:600;color:var(--primary)}
+.card{background:#fff;border-radius:14px;box-shadow:0 1px 5px rgba(15,23,42,.08);padding:14px}
+.hero{position:relative;height:180px;border-radius:16px;overflow:hidden;background:#dbeafe;display:flex;align-items:center;width:100%;text-align:left}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:80% 30%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(235,244,255,.96),rgba(235,244,255,.85) 28%,rgba(235,244,255,0) 62%)}
+.hero div{position:relative;z-index:2;padding:0 20px}.hero h2{font-size:24px;font-weight:800;color:var(--primary)}.hero p{font-size:13px;color:var(--body);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.svc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:100px;border-radius:14px;box-shadow:0 1px 4px rgba(15,23,42,.08);transition:.15s}
+.svc:hover{transform:translateY(-2px)}
+.svc img{height:44px}.svc span{font-size:11px;font-weight:600;color:var(--strong);text-align:center}
+.c1{background:#fef0f0}.c2{background:#fff9e6}.c3{background:#eafaf1}.c4{background:#fefce8}.c5{background:#f3f1ff}.c6{background:#edf4ff}
+.upg{position:relative;overflow:hidden;margin-top:20px;border-radius:16px;background:linear-gradient(135deg,var(--primary),var(--mid));color:#fff;padding:20px 16px;display:flex;align-items:center;justify-content:center;text-align:center;min-height:106px;width:100%}
+.upg .l{font-size:12px;font-weight:600;color:var(--accent)}.upg .t{font-size:18px;font-weight:800;margin-top:2px}.upg .s{font-size:12px;color:var(--soft);margin-top:4px;line-height:1.4}
+.upg .b{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:#fff;color:var(--primary);font-weight:800;font-size:14px;padding:11px 14px;border-radius:12px}
+.art{display:flex;background:#fff;border-radius:14px;box-shadow:0 1px 5px rgba(15,23,42,.08);overflow:hidden;margin-bottom:10px;min-height:104px;position:relative;width:100%;text-align:left}
+.art .th{width:97px;background:var(--app);flex-shrink:0;display:grid;place-items:center;font-size:30px}
+.art .bd{padding:12px 44px 12px 12px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.tag{align-self:flex-start;font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:#f3e8ff;color:#6b21a8}
+.tag.g{background:#dcfce7;color:#166534}
+.art h4{font-size:13px;font-weight:700;margin-top:6px}.art p{font-size:10.5px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.art time{font-size:9.5px;color:var(--faint);margin-top:6px}
+.go{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:var(--line2);display:grid;place-items:center;font-size:12px;color:var(--faint)}
+/* bottom nav */
+.nav{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding:8px 0 10px;flex-shrink:0}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:500;color:var(--faint);position:relative}
+.tab svg{width:18px;height:18px;fill:currentColor}
+.tab.on{color:var(--primary);font-weight:700}.tab.on:after{content:"";position:absolute;bottom:-5px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
+/* layanan list */
+.li{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;box-shadow:0 1px 5px rgba(15,23,42,.08);padding:14px;margin-bottom:12px;width:100%;text-align:left;position:relative}
+.li .ic{width:44px;height:44px;border-radius:12px;background:var(--line2);display:grid;place-items:center;flex-shrink:0;font-size:24px}
+.li .ic img{width:30px;height:30px;object-fit:contain}
+.li b{font-size:13px;font-weight:700}.li .pill{font-size:9px;font-weight:600;background:#eef2ff;color:var(--mid);padding:2px 8px;border-radius:99px;margin-left:6px}
+.li .pill.k{background:#dcfce7;color:#166534}
+.li small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.li strong{display:block;font-size:11.5px;margin-top:5px;font-weight:700}
+.li .chev{margin-left:auto;color:var(--faint);font-size:14px}
+/* paket */
+.plan{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;box-shadow:0 1px 5px rgba(15,23,42,.08);padding:14px;margin-bottom:14px;width:100%;text-align:left;position:relative}
+.plan img{width:36px;height:36px}.plan b{font-size:13px}.plan .q{display:inline-block;font-size:9.5px;background:#eef2ff;color:var(--mid);padding:2px 8px;border-radius:99px;margin-top:4px}
+.plan .pr{margin-left:auto;text-align:right}.plan .pr strong{font-size:15px;display:block}.plan .pr small{font-size:10px;color:var(--muted)}
+.plan .go2{width:22px;height:22px;border-radius:50%;background:#e0e7ff;margin-left:auto;display:grid;place-items:center;font-size:11px;color:var(--mid);margin-top:6px}
+.plan.pop{background:linear-gradient(135deg,var(--primary),var(--mid));color:#fff;border:2px solid var(--accent)}
+.plan.pop .q{background:rgba(255,255,255,.15);color:#fff}.plan.pop .pr strong{color:var(--accent)}.plan.pop .pr small{color:var(--soft)}
+.badge{position:absolute;top:-10px;left:12px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px}
+.note{display:flex;gap:8px;background:#fff;border-radius:12px;padding:12px;font-size:11px;color:var(--muted);box-shadow:0 1px 4px rgba(15,23,42,.06)}
+/* buttons / forms */
+.btn{display:block;width:100%;background:var(--primary);color:#fff;font-weight:700;font-size:14px;padding:13px;border-radius:12px;text-align:center}
+.btn.o{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+.btn.acc{background:var(--accent)}
+label{display:block;font-size:12px;font-weight:600;margin:12px 0 5px;color:var(--strong)}
+input,select,textarea{width:100%;background:#f9fafb;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:13px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--mid)}
+.chk{display:flex;gap:10px;font-size:12.5px;color:var(--body);margin:9px 0;line-height:1.4}.chk i{color:var(--ok);font-style:normal;font-weight:800}
+.warn{background:var(--notice);border-radius:12px;padding:12px;font-size:11.5px;color:#7a4b00;line-height:1.45}
+.alert{background:var(--dbg);border:1px solid var(--db);color:var(--dt);border-radius:12px;padding:12px;font-size:12px;line-height:1.45}
+.step{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;background:#fff;font-size:11px;color:var(--faint);font-weight:600}
+.step span{width:22px;height:22px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:11px;color:var(--muted)}
+.step span.on{background:var(--primary);color:#fff}.step u{width:26px;height:2px;background:var(--line)}
+.opt{display:flex;gap:12px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;width:100%;text-align:left}
+.opt.on{border-color:var(--primary);background:#f4f7ff}
+.opt .e{font-size:22px}.opt b{font-size:13px;display:block}.opt small{font-size:11px;color:var(--muted)}
+/* chat */
+.chat{flex:1;overflow-y:auto;background:var(--app);padding:14px}
+.disc{background:var(--notice);font-size:10.5px;color:#7a4b00;padding:8px 14px;flex-shrink:0}
+.msg{display:flex;gap:8px;margin-bottom:12px}.av{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;flex-shrink:0}
+.bub{background:#fff;border-radius:4px 14px 14px 14px;padding:11px 13px;font-size:12.5px;line-height:1.5;max-width:82%;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.bub.me{background:var(--primary);color:#fff;border-radius:14px 4px 14px 14px;margin-left:auto}
+.bub time{display:block;font-size:9px;color:var(--faint);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px 38px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:11.5px;font-weight:600;color:var(--primary)}
+.faq{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:8px 0 8px 38px}
+.faqi{display:block;margin:0 0 8px 38px;background:#fff;border-radius:12px;padding:11px 13px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,.05);text-align:left;width:calc(100% - 38px)}
+.compose{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid var(--line);flex-shrink:0}
+.compose input{border-radius:99px}.send{width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;font-size:16px;flex-shrink:0}
+/* profile */
+.pf{background:var(--primary);color:#fff;padding:14px 16px 56px;flex-shrink:0}
+.pf h1{font-size:17px;font-weight:800}
+.pfu{display:flex;gap:12px;align-items:center;margin-top:14px}.pfa{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-weight:800;font-size:17px}
+.pfu b{font-size:14px}.pfu small{display:block;font-size:11px;color:var(--soft)}
+.pc{background:#fff;border-radius:16px;margin:-40px 12px 0;padding:14px;box-shadow:0 2px 10px rgba(15,23,42,.1)}
+.pc .r{display:flex;justify-content:space-between;font-size:12px;font-weight:600}
+.pc h2{font-size:15px;font-weight:800;margin-top:10px}.pc .n{font-size:20px;font-weight:800;text-align:right;margin-top:-30px}
+.bar{height:6px;background:var(--line);border-radius:9px;margin-top:12px;overflow:hidden}.bar i{display:block;height:100%;width:100%;background:var(--primary)}
+.grp{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.06em;margin:18px 16px 6px}
+.menu{background:#fff;border-radius:14px;margin:0 12px;box-shadow:0 1px 5px rgba(15,23,42,.06);overflow:hidden}
+.mi{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line2);width:100%;text-align:left}.mi:last-child{border:0}
+.mi .e{font-size:20px;width:26px;text-align:center}.mi b{font-size:13px;font-weight:600;display:block}.mi small{font-size:10.5px;color:var(--faint)}.mi .c{margin-left:auto;color:var(--faint)}
+.ft{text-align:center;font-size:10.5px;color:var(--faint);padding:18px;line-height:1.7}
+.dg{display:block;margin:12px;text-align:center;font-size:13px;font-weight:700;color:var(--danger)}
+/* sheet */
+.ov{position:absolute;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;z-index:20;animation:f .2s}
+.sheet{background:#fff;border-radius:20px 20px 0 0;width:100%;max-height:82%;overflow-y:auto;padding:20px 18px 24px;animation:u .25s}
+.sheet h3{font-size:16px;font-weight:800;margin-bottom:10px}.sheet h5{font-size:12.5px;font-weight:700;margin:14px 0 4px}.sheet p,.sheet li{font-size:12px;color:var(--body);line-height:1.55}
+.sheet ul{padding-left:18px}
+@keyframes u{from{transform:translateY(40px);opacity:0}}@keyframes f{from{opacity:0}}
+/* emptiness */
+.empty{text-align:center;color:var(--faint);font-size:13px;padding:80px 20px}.empty div{font-size:46px;opacity:.55;margin-bottom:8px}
+.t{font-size:13px;font-weight:700}
+.letter{background:#fff;border-radius:12px;padding:16px;font-size:12px;line-height:1.7;border:1px solid var(--line);white-space:pre-line}
+.emg{background:var(--dbg);border:1px solid var(--db);color:var(--dt);border-radius:12px;padding:12px;font-size:12px;display:flex;gap:10px;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;font-size:12.5px;padding:9px 0;border-bottom:1px solid var(--line2)}.row:last-child{border:0}.row b{color:var(--primary)}
+.big{font-size:12px}
+.res{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:12px;padding:14px;margin-top:14px;font-size:12.5px;line-height:1.7}
+.res strong{font-size:18px;display:block;color:#14532d}
+.price{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:13px;margin:14px 0;box-shadow:0 1px 4px rgba(15,23,42,.06);font-size:12px}.price b{font-size:16px;color:var(--primary)}
+.upl{border:2px dashed #c7d2fe;border-radius:14px;padding:26px;text-align:center;color:var(--muted);font-size:12px;background:#f8faff}
+@media(max-width:520px){.hero{height:150px}.hero h2{font-size:20px}.svc{height:92px}.svc img{height:38px}.upg .b{position:static;transform:none;margin-left:12px}.upg{justify-content:space-between}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const IMG=n=>`https://www.belahukum.com/figma/image-${n}.png`;
+const $=s=>document.querySelector(s);
+const chev='›';
+// ---- state ----
+let state={riwayatTab:'Tanya BELA',antiTab:'Panduan',kerjaTab:'Kalkulator Pesangon',konsTab:'Konsumen',suratStep:1,suratType:null,sheet:null,article:null,doc:null};
+const user={name:'Nama Pengguna',ini:'NP',phone:'62812XXXXXXXX'};
+
+// ---- shared pieces ----
+const navItems=[['/','Beranda','<path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3z"/>'],['/layanan','Layanan','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],['/riwayat','Riwayat','<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7z"/>'],['/profil','Profil','<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/>']];
+const bottomNav=p=>`<nav class="nav">${navItems.map(([h,l,d])=>`<button class="tab ${p===h?'on':''}" onclick="go('${h}')"><svg viewBox="0 0 24 24">${d}</svg>${l}</button>`).join('')}</nav>`;
+const sub=(title,back,subtitle='')=>`<div class="nh"><div class="back"><button onclick="${back?`go('${back}')`:'history.back()'}">←</button><div><h1>${title}</h1>${subtitle?`<p>${subtitle}</p>`:''}</div></div></div>`;
+const tabs=(list,key)=>`<div class="tabs">${list.map(t=>`<button class="${state[key]===t?'on':''}" onclick="state.${key}='${t}';render()">${t}</button>`).join('')}</div>`;
+const sheet=(html)=>`<div class="ov" onclick="if(event.target===this){state.sheet=null;render()}"><div class="sheet">${html}<button class="btn" style="margin-top:16px" onclick="state.sheet=null;render()">Tutup</button></div></div>`;
+const bell='<svg viewBox="0 0 24 24" fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>';
+const cta=(a,b)=>`<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">${a}${b||''}</div>`;
+const toast=m=>alert(m+'\n\n(Demo clone — fitur ini tidak aktif)');
+
+// ---- pages ----
+const pages={};
+
+pages['/']=()=>`<div class="view"><div class="top"><div class="top-row"><img class="logo" src="${IMG(10)}" alt="BELA"><div class="right"><span class="quota"><i></i>Harian · 10 tersisa</span><button class="bell">${bell}</button></div></div><p class="hello">Selamat malam,</p><h1 class="name">${user.name} 👋</h1></div>
+<div class="scroll pad" style="padding-top:8px">
+<button class="hero" onclick="go('/tanya')"><img src="${IMG(2)}" alt=""><div><h2>Tanya BELA</h2><p>Ada masalah hukum?<br>Ceritakan di sini</p></div></button>
+<div class="sec"><h3>Layanan Hukum</h3><button class="see" onclick="go('/layanan')">Lihat semua ›</button></div>
+<div class="grid">
+<button class="svc c1" onclick="go('/anti-pinjol')"><img src="${IMG(24)}"><span>Anti-Pinjol</span></button>
+<button class="svc c2" onclick="go('/bela-kerja')"><img src="${IMG(5)}"><span>BELA Kerja</span></button>
+<button class="svc c3" onclick="go('/waris-tanah')"><img src="${IMG(6)}"><span>Waris &amp; Tanah</span></button>
+<button class="svc c4" onclick="go('/konsumen-kdrt')"><img src="${IMG(27)}"><span>Konsumen &amp; KDRT</span></button>
+<button class="svc c5" onclick="go('/advokat')"><img src="${IMG(32)}"><span>Konsultasi Advokat</span></button>
+<button class="svc c6" onclick="go('/surat')"><img src="${IMG(9)}"><span>Draft Surat</span></button></div>
+<button class="upg" onclick="go('/paket')"><div><div class="l">Paket Aktif — BELA Harian</div><div class="t">Upgrade ke Bulanan</div><div class="s">500 pertanyaan + 3x review dokumen<br>Rp 29.000/bln</div></div><span class="b">👑 Upgrade</span></button>
+<div class="sec"><h3>📚 Bekal Hukum Hari Ini</h3><button class="see" onclick="go('/bekal')">Lihat semua ›</button></div>
+${articles.map((a,i)=>artCard(a,i)).join('')}
+</div>${bottomNav('/')}</div>`;
+
+const articles=[
+ {tag:'Umum',g:0,t:'Somasi: kapan perlu dan kapan cukup teguran biasa?',d:'Somasi (teguran hukum formal) perlu bila: ada utang kewajiban yang diabaikan, Anda siap menuntut, atau butuh bukti itikad baik di pengadilan. Cukup teguran biasa bila urusan masih damai.',date:'19 Okt',read:'2 menit baca'},
+ {tag:'Waris & Tanah',g:1,t:'NIB bukan sertifikat — apa bedanya?',d:'NIB (Nomor Izin Berusaha) hanya registrasi awal usaha, bukan bukti kepemilikan penuh atas tanah. Untuk kepastian hak, tetap diperlukan sertifikat.',date:'18 Okt',read:'2 menit baca'}];
+const artCard=(a,i)=>`<button class="art" onclick="state.article=${i};go('/bekal')"><div class="th">📖</div><div class="bd"><span class="tag ${a.g?'g':''}">${a.tag}</span><h4>${a.t}</h4><p>${a.d}</p><time>${a.date}</time></div><span class="go">›</span></button>`;
+
+pages['/layanan']=()=>{
+ const items=[[29,'Tanya BELA','AI','Tanya AI hukum — triase masalah, panduan langkah pertama, dasar pasal','Termasuk dalam paket','/tanya'],[30,'Review Dokumen','Add-on','Analisis kontrak, perjanjian, surat kerja — penandaan klausul berisiko','Rp15.000 / dokumen','/dokumen'],[9,'Draft Surat Somasi','Add-on','Penyusunan somasi atau surat teguran siap kirim, ditinjau template legal','Rp25.000 / surat','/surat'],[24,'Anti-Pinjol','Add-on','Panduan menghadapi penagihan ilegal + template pelaporan OJK dan Satgas PASTI','Rp 10.000 / bulan','/anti-pinjol'],[5,'BELA Kerja','Add-on','Kalkulator pesangon, telaah kontrak kerja, template pengaduan Disnaker','Rp 12.000 / bulan','/bela-kerja'],[6,'Waris & Tanah','Keluarga','Sengketa keluarga, sertifikat, girik, pembagian warisan','Termasuk BELA Keluarga','/waris-tanah'],[27,'Konsumen & KDRT','Keluarga','Penipuan online, perlindungan konsumen, perlindungan kekerasan dalam rumah tangga','Termasuk BELA Keluarga','/konsumen-kdrt'],['📚','Bekal Hukum','Harian','Satu bekal hukum setiap hari — konten harian untuk semua pelanggan aktif','Termasuk semua paket','/bekal'],[32,'Konsultasi Advokat','Advokat','Sesi 30 menit dengan Joseph Harianja & Partners, advokat berlisensi','Rp 150.000 / 30 menit','/advokat']];
+ return `<div class="view">${sub('Layanan BELA','','One stop legal support untuk pelanggan Indosat').replace('<button onclick="history.back()">←</button>','')}
+ <div class="scroll pad">${items.map(([im,t,p,d,pr,h])=>`<button class="li" onclick="go('${h}')"><div class="ic">${typeof im==='number'?`<img src="${IMG(im)}">`:im}</div><div><b>${t}</b><span class="pill ${p==='Keluarga'||p==='Harian'?'k':''}">${p}</span><small>${d}</small><strong>${pr}</strong></div><span class="chev">›</span></button>`).join('')}
+ <button class="li" onclick="go('/paket')" style="background:var(--primary);color:#fff"><div class="ic" style="background:rgba(255,255,255,.12)"><img src="${IMG(38)}"></div><div><b>Lihat Paket BELA</b><small style="color:var(--soft)">Paket harian, mingguan, dan bulanan — mulai Rp1.000/hari</small></div><span class="chev" style="color:#fff">›</span></button></div>${bottomNav('/layanan')}</div>`};
+
+pages['/riwayat']=()=>`<div class="view"><div class="nh"><h1>Riwayat</h1><p>Semua aktivitas hukum Anda</p></div>${tabs(['Tanya BELA','Review','Draft','Konsultasi','Pembayaran'],'riwayatTab')}<div class="scroll"><div class="empty"><div>📋</div>Belum ada riwayat</div></div>${bottomNav('/riwayat')}</div>`;
+
+pages['/profil']=()=>`<div class="view"><div class="pf"><h1>Profil</h1><div class="pfu"><div class="pfa">${user.ini}</div><div><b>${user.name}</b><small>${user.phone}</small><small>Pelanggan Indosat Prabayar</small></div></div></div>
+<div class="scroll" style="background:var(--app)"><div class="pc"><div class="r"><span>Paket Aktif</span><button style="font-weight:700;color:var(--primary);font-size:12px" onclick="go('/paket')">Upgrade</button></div><h2>BELA Harian</h2><div class="n">10</div><div class="r" style="font-weight:400;color:var(--muted);font-size:10.5px;margin-top:-4px"><span>Kuota harian gratis</span><span>pertanyaan tersisa</span></div><div class="bar"><i></i></div><div style="font-size:10px;color:var(--faint);margin-top:6px">10 dari 10 pertanyaan tersisa</div></div>
+<div class="grp">PAKET &amp; KUOTA</div><div class="menu"><button class="mi" onclick="go('/paket')"><span class="e">📦</span><div><b>Paket Aktif</b><small>BELA Harian · 10 pertanyaan tersisa</small></div><span class="c">›</span></button><button class="mi" onclick="go('/riwayat')"><span class="e">📊</span><div><b>Riwayat Penggunaan</b><small>Lihat detail kuota</small></div><span class="c">›</span></button></div>
+<div class="grp">LAYANAN</div><div class="menu"><button class="mi" onclick="go('/tanya')"><span class="e"><img src="${IMG(29)}" width="24"></span><div><b>Tanya BELA</b><small>Mulai sesi baru</small></div><span class="c">›</span></button><button class="mi" onclick="go('/advokat')"><span class="e"><img src="${IMG(32)}" width="24"></span><div><b>Konsultasi Advokat</b><small>Joseph Harianja &amp; Partners</small></div><span class="c">›</span></button></div>
+<div class="grp">AKUN &amp; PENGATURAN</div><div class="menu">${[['🔔','Notifikasi','Izin & preferensi','notif'],['🔒','Privasi & Data','Kelola data pribadi Anda','privasi'],['❓','Bantuan','FAQ dan cara penggunaan','bantuan'],['📜','Syarat & Ketentuan','','syarat'],['🛡️','Kebijakan Privasi','','kebijakan']].map(([e,t,s,k])=>`<button class="mi" onclick="state.sheet='${k}';render()"><span class="e">${e}</span><div><b>${t}</b>${s?`<small>${s}</small>`:''}</div><span class="c">›</span></button>`).join('')}</div>
+<button class="dg" onclick="state.sheet='unreg';render()">Berhenti Berlangganan</button><button class="dg" style="color:var(--muted);margin-top:-4px" onclick="toast('Keluar dari akun')">Keluar dari Akun</button>
+<div class="ft">BELA × Indosat Ooredoo Hutchison<br>Layanan hukum oleh Joseph Harianja &amp; Partners<br>Versi 4.0</div></div>${bottomNav('/profil')}${sheets()}</div>`;
+
+function sheets(){const s=state.sheet; if(!s)return '';
+ const m={
+ notif:`<h3>Aktifkan Notifikasi</h3><p>Izinkan notifikasi agar Anda tidak melewatkan hal penting:</p><h5>Status konsultasi advokat</h5><p>Kabar saat jadwal dikonfirmasi atau berubah.</p><h5>Review dokumen selesai</h5><p>Diberi tahu begitu analisis dokumen Anda siap.</p><p style="margin-top:12px;color:var(--muted)">Notifikasi hanya berisi status dan pengingat — tidak pernah memuat isi percakapan atau dokumen hukum Anda.</p>`,
+ privasi:`<h3>Hapus Akun Permanen</h3><p>Seluruh data Anda akan dihapus permanen: riwayat percakapan, dokumen yang diunggah, hasil review, draft surat, jadwal konsultasi, dan notifikasi. Tindakan ini tidak dapat dibatalkan.</p><label>Ketik HAPUS untuk konfirmasi</label><input placeholder="HAPUS"><button class="btn" style="margin-top:12px;background:var(--danger)" onclick="toast('Hapus akun')">Hapus Akun Saya</button>`,
+ bantuan:`<h3>Bantuan</h3><h5>Cara pakai BELA</h5><ul><li><b>Tanya BELA</b> — tulis pertanyaan hukum Anda, dijawab asisten AI BELA dengan rujukan hukum tervalidasi.</li><li><b>Review Dokumen</b> — unggah kontrak/surat (PDF, JPG, PNG, maks. 10MB), BELA menandai klausul berisiko.</li><li><b>Draft Surat</b> — pilih jenis surat, isi formulir, unduh PDF siap kirim.</li><li><b>Konsultasi Advokat</b> — pilih jadwal dengan mitra advokat Joseph Harianja &amp; Partners.</li><li><b>Bekal Hukum</b> — ringkasan hukum harian pukul 07.00.</li></ul><h5>Kuota pertanyaan</h5><p>Paket harian mendapat kuota pertanyaan per hari. Kuota reset setiap hari dan hanya terpakai saat pertanyaan berhasil dijawab.</p><h5>Masih butuh bantuan?</h5><p>Hubungi layanan pelanggan Indosat: 185 (Indosat Ooredoo Hutchison).</p>`,
+ syarat:`<h3>Syarat &amp; Ketentuan</h3><h5>Ringkasan Layanan</h5><p>BELA adalah layanan informasi hukum digital bagi pelanggan Indosat: informasi hukum umum, telaah dokumen, pembuatan draft surat, dan rujukan ke advokat mitra.</p><h5>Bukan Nasihat Hukum Mengikat</h5><p>Jawaban BELA bersifat informasi hukum. Nasihat hukum yang mengikat hanya diberikan advokat berlisensi melalui sesi konsultasi.</p><h5>Langganan &amp; Tagihan</h5><p>Paket dan layanan berbayar dibayar melalui metode pembayaran yang Anda pilih di aplikasi (mis. e-wallet / virtual account). Berhenti kapan saja: ketik UNREG BELA1 kirim SMS ke 99790. Sisa kuota tetap berlaku sampai periode berakhir.</p><h5>Batasan Tanggung Jawab</h5><p>BELA tidak menggantikan nasihat profesional untuk perkara spesifik Anda dan tidak menjamin hasil perkara.</p>`,
+ kebijakan:`<h3>Kebijakan Privasi</h3><h5>Data yang Kami Kumpulkan</h5><p>Nomor HP, nama, dan data yang Anda kirimkan saat memakai layanan (pertanyaan, dokumen yang diunggah, draft surat).</p><h5>Bagaimana Kami Memakai Data</h5><p>Menjawab pertanyaan dan memproses layanan yang Anda minta. Telaah dokumen diproses server-side; dokumen disimpan privat dan dihapus otomatis maksimal 90 hari.</p><h5>Notifikasi</h5><p>Notifikasi hanya berisi status layanan — tidak pernah memuat isi percakapan atau dokumen Anda.</p><h5>Hak Anda</h5><p>Anda dapat meminta penghapusan akun dan seluruh data terkait kapan saja melalui Profil → Privasi &amp; Data → Hapus Akun. Penghapusan bersifat permanen.</p>`,
+ unreg:`<h3>Berhenti Berlangganan</h3><p>Untuk berhenti berlangganan, ketik <b>UNREG BELA1</b> lalu kirim SMS ke <b>99790</b>. Sisa kuota tetap berlaku sampai periode berakhir.</p><p style="margin-top:8px;color:var(--muted)">(Demo clone — tidak ada langganan yang diubah.)</p>`};
+ return sheet(m[s]||'')}
+
+// chat
+pages['/tanya']=()=>`<div class="view">${sub('Tanya BELA','/')}<div class="disc">Jawaban BELA adalah informasi hukum, bukan nasihat hukum mengikat. Nasihat mengikat hanya dari advokat berlisensi.</div>
+<div class="chat" id="chat"><div class="msg"><div class="av">B</div><div class="bub"><b>BELA</b><br>Halo! Saya BELA, asisten hukum digital Anda. Saya bisa bantu menjawab pertanyaan hukum, memandu langkah awal, dan jika dibutuhkan, menghubungkan Anda dengan advokat berlisensi.<br><br>Apa yang ingin Anda tanyakan hari ini?<time>09.00</time></div></div>
+<div class="chips"><button class="chip" onclick="ask('Masalah pinjol')">Masalah pinjol</button><button class="chip" onclick="ask('PHK & pesangon')">PHK &amp; pesangon</button><button class="chip" onclick="ask('Waris & tanah')">Waris &amp; tanah</button></div>
+<div class="faq">Pertanyaan yang sering ditanyakan</div>
+${['Gaji saya dipotong tanpa surat, boleh?','Kontrak kerja saya tidak ada pesangon','Pinjol menyebarkan data saya','Tanah warisan dijual tanpa ijin'].map(q=>`<button class="faqi" onclick="ask(\`${q}\`)">${q}</button>`).join('')}</div>
+<form class="compose" onsubmit="event.preventDefault();const i=this.q;if(i.value.trim())ask(i.value.trim());i.value=''"><input name="q" placeholder="Tulis pertanyaan hukum Anda..."><button class="send">➤</button></form></div>`;
+function ask(q){const c=$('#chat');c.insertAdjacentHTML('beforeend',`<div class="msg"><div class="bub me">${q.replace(/</g,'&lt;')}</div></div><div class="msg"><div class="av">B</div><div class="bub">Ini hanya tampilan demo, jadi BELA tidak benar-benar menjawab. Di aplikasi asli, jawaban AI dengan rujukan pasal akan muncul di sini.<time>sekarang</time></div></div>`);c.scrollTop=c.scrollHeight}
+
+// dokumen
+pages['/dokumen']=()=>`<div class="view">${sub('Review Dokumen','/layanan')}<div class="scroll pad"><div class="card"><h2 style="font-size:16px;font-weight:800">Review Dokumen Hukum</h2><p style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Unggah kontrak atau surat Anda. BELA akan mengidentifikasi klausul berisiko dan memberikan catatan yang perlu Anda perhatikan.</p></div>
+<p class="t" style="margin:16px 0 4px">Yang akan dianalisis:</p><div class="card">${['Klausul pelepasan hak yang merugikan','Ketentuan yang tidak sesuai UU Ketenagakerjaan','Pasal tersembunyi yang membatasi hak Anda','Estimasi hak dan kewajiban berdasarkan isi dokumen'].map(t=>`<div class="chk"><i>✓</i>${t}</div>`).join('')}</div>
+<div class="upl" style="margin-top:14px">📄 Unggah dokumen (PDF, JPG, PNG · maks. 10MB)</div>
+<div class="warn" style="margin-top:14px">Review BELA bersifat informatif. Untuk penilaian mengikat, lanjutkan ke konsultasi advokat.</div>
+<div class="price"><span>Biaya layanan<br><small style="color:var(--muted)">Per dokumen — metode pembayaran dipilih saat transaksi</small></span><b>Rp15.000</b></div>
+<button class="btn" onclick="toast('Mulai Review Dokumen')">Mulai Review Dokumen</button></div></div>`;
+
+// surat
+pages['/surat']=()=>{const types=[['⚖️','Surat Somasi','Teguran resmi sebelum tindakan hukum'],['💼','Keberatan PHK','Keberatan atas pemutusan hubungan kerja'],['🛡️','Pengaduan Pinjol','Laporan ke Satgas PASTI / OJK'],['🛒','Keberatan Konsumen','Sengketa produk atau layanan'],['🔒','Permintaan Hapus Data','Hak penghapusan data pribadi (UU PDP)'],['📝','Surat Teguran Lainnya','Surat teguran untuk keperluan lain']];
+ const s=state.suratStep, st=`<div class="step"><span class="${s>=1?'on':''}">1</span>Pilih<u></u><span class="${s>=2?'on':''}">2</span>Isi<u></u><span class="${s>=3?'on':''}">3</span>Preview</div>`;
+ let body='';
+ if(s===1)body=`<p class="t">Pilih Jenis Surat</p><p style="font-size:11px;color:var(--muted);margin:3px 0 12px">Rp25.000 / surat — metode pembayaran dipilih saat transaksi</p>${types.map(([e,t,d])=>`<button class="opt ${state.suratType===t?'on':''}" onclick="state.suratType='${t}';state.suratStep=2;render()"><span class="e">${e}</span><div><b>${t}</b><small>${d}</small></div></button>`).join('')}`;
+ if(s===2)body=`<p class="t">${state.suratType}</p><label>Nama lengkap Anda</label><input id="f1" placeholder="Nama sesuai KTP"><label>Nama pihak yang dituju</label><input id="f2" placeholder="Nama orang / perusahaan"><label>Tanggal kejadian</label><input id="f3" type="date"><label>Uraian singkat masalah</label><textarea id="f4" rows="4" placeholder="Ceritakan kronologi singkat..."></textarea>${cta(`<button class="btn" onclick="state.suratStep=3;state.f=[f1.value,f2.value,f3.value,f4.value];render()">Lanjut ke Preview</button>`,`<button class="btn o" onclick="state.suratStep=1;render()">Kembali</button>`)}`;
+ if(s===3){const f=state.f||[];body=`<p class="t">Preview ${state.suratType}</p><div class="letter" style="margin-top:10px">Kepada Yth.\n${f[1]||'[Pihak yang dituju]'}\n\nHal: ${state.suratType}\n\nDengan hormat,\nSaya, ${f[0]||'[Nama Anda]'}, dengan ini menyampaikan ${state.suratType.toLowerCase()} terkait kejadian pada ${f[2]||'[tanggal]'}.\n\n${f[3]||'[Uraian masalah]'}\n\nDemikian surat ini kami sampaikan.\n\nHormat saya,\n${f[0]||'[Nama Anda]'}</div>${cta(`<button class="btn" onclick="toast('Bayar & unduh PDF — Rp25.000')">Bayar &amp; Unduh PDF — Rp25.000</button>`,`<button class="btn o" onclick="state.suratStep=2;render()">Ubah Isian</button>`)}`}
+ return `<div class="view">${sub('Draft Surat','/layanan')}<div class="nh" style="padding-top:0;margin-top:-1px"><div class="sub2" style="margin-top:0">Draft Surat Somasi</div><p>Penyusunan surat resmi siap kirim — Rp25.000/surat</p></div>${st}<div class="scroll pad">${body}</div></div>`};
+
+// anti-pinjol
+pages['/anti-pinjol']=()=>{const t=state.antiTab;let b='';
+ if(t==='Panduan')b=`<div class="alert">🚨 <b>Sedang diteror sekarang? Jangan panik.</b> Ikuti langkah berikut.</div>${[['📸','Kumpulkan Bukti','Tangkapan layar chat, rekaman telepon, daftar kontak yang dihubungi. Jangan dihapus.'],['🚫','Blokir, Bukan Hapus','Blokir nomor penagih tapi simpan riwayat percakapan sebagai barang bukti.'],['📋','Lapor ke Satgas PASTI','Satuan Tugas Pemberantasan Aktivitas Keuangan Ilegal — OJK. Laporan online tersedia 24 jam.'],['⚖️','Lapor ke Bareskrim','Jika ada ancaman kekerasan atau tindak pidana, buat laporan ke Bareskrim Polri.']].map(([e,h,d],i)=>`<div class="card" style="display:flex;gap:12px;margin-top:12px"><div style="font-size:26px">${e}</div><div><small style="color:var(--accent);font-weight:800">LANGKAH ${i+1}</small><div class="t">${h}</div><p style="font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5">${d}</p></div></div>`).join('')}${cta(`<button class="btn" onclick="go('/tanya')">Tanya BELA tentang kasus saya</button>`)}`;
+ if(t==='Template Laporan')b=`<div class="letter">Kepada Yth.\nSatgas Pemberantasan Aktivitas Keuangan Ilegal\nc.q. Otoritas Jasa Keuangan (OJK)\n\nHal: Pengaduan Penagihan Ilegal\n\nDengan hormat, saya yang bertanda tangan di bawah ini:\nNama: [Nama Anda]\nNo. HP: [Nomor Anda]\n\nMelaporkan tindakan penagihan ilegal oleh [Nama Pinjol/Penagih] yang terjadi pada [tanggal]. Tindakan tersebut berupa: penyebaran data kontak, pengancaman, dan/atau penagihan di luar waktu yang diizinkan.\n\nBukti terlampir: [tangkapan layar / rekaman].</div>${cta(`<button class="btn" onclick="go('/surat')">Buat surat pengaduan lengkap — Rp 25.000</button>`)}<div class="sec"><h3 style="font-size:14px">Kontak Pengaduan Resmi</h3></div><div class="card">${[['Satgas PASTI (OJK)','157 · waspadainvestasi.id'],['Bareskrim Polri','patroli-siber.id'],['Kominfo (UU ITE)','aduankonten.id']].map(([a,b])=>`<div class="row"><span>${a}</span><b>${b}</b></div>`).join('')}</div>`;
+ if(t==='Hak Anda')b=`<p style="font-size:11px;color:var(--muted);margin-bottom:10px">Berdasarkan POJK No. 35/2018 &amp; UU No. 27/2022</p><div class="card">${['Penagih hanya boleh menghubungi penjamin, bukan kontak lain','Penagih dilarang mengancam, mempermalukan, atau menyebarkan data','Penagih hanya boleh menghubungi antara 08.00–20.00','Penyebaran data kontak tanpa izin melanggar UU No. 27/2022','Anda berhak meminta penghapusan data setelah pinjaman lunas'].map(x=>`<div class="chk"><i>✓</i>${x}</div>`).join('')}</div>${cta(`<button class="btn o" onclick="go('/advokat')">Konsultasi Advokat — Rp 150.000/30 menit</button>`)}`;
+ return `<div class="view">${sub('Anti-Pinjol','/layanan','Perlindungan dari Pinjol Ilegal')}<div class="nh" style="padding-top:0"><p style="margin:0">Panduan + template laporan Satgas PASTI / OJK</p></div>${tabs(['Panduan','Template Laporan','Hak Anda'],'antiTab')}<div class="scroll pad">${b}</div></div>`};
+
+// bela kerja
+pages['/bela-kerja']=()=>{const t=state.kerjaTab;let b='';
+ if(t==='Kalkulator Pesangon')b=`<div class="warn">Hasil ini adalah estimasi berdasarkan UU No. 13/2003 jo. PP No. 35/2021. Angka pasti bergantung pada ketentuan perusahaan Anda.</div><label>Gaji Pokok (Rp)</label><input id="k1" type="number" placeholder="5000000"><label>Tunjangan Tetap (Rp)</label><input id="k2" type="number" placeholder="1000000"><label>Masa Kerja (tahun)</label><input id="k3" type="number" placeholder="4"><label>Jenis PHK</label><select id="k4"><option>Efisiensi</option><option>Perampingan</option><option>PHK Biasa</option><option>Pensiun</option><option>Penutupan Perusahaan</option></select>${cta(`<button class="btn" onclick="hitung()">Hitung Pesangon Saya</button>`)}<div id="hasil"></div>`;
+ if(t==='Telaah Kontrak')b=`<p style="font-size:12.5px;color:var(--body);margin-bottom:10px">Unggah kontrak kerja Anda untuk ditelaah klausul-klausulnya.</p><div class="card">${['Klausul non-kompete yang membatasi kebebasan kerja','Pasal pelepasan hak pesangon yang tersembunyi','Ketentuan lembur yang tidak sesuai UU','Klausul penalti resign yang tidak wajar','Masa percobaan melebihi 3 bulan'].map(x=>`<div class="chk"><span>🔍</span>${x}</div>`).join('')}</div>${cta(`<button class="btn" onclick="go('/dokumen')">Review Kontrak Kerja — Rp 15.000</button>`)}`;
+ if(t==='Template Disnaker')b=`<p style="font-size:12.5px;color:var(--body);margin-bottom:10px">Template pengaduan resmi ke Dinas Ketenagakerjaan (Disnaker).</p><p class="t" style="margin-bottom:8px">Pilih jenis pengaduan:</p>${['Pengaduan PHK tanpa prosedur','Pengaduan pesangon tidak dibayar','Pengaduan pemotongan gaji sepihak','Pengaduan kontrak kerja tidak sah'].map(x=>`<button class="opt" onclick="toast('Template: ${x}')"><div><b>${x}</b></div></button>`).join('')}`;
+ return `<div class="view">${sub('BELA Kerja','/layanan','Pendampingan Hukum Ketenagakerjaan')}<div class="nh" style="padding-top:0"><p style="margin:0">PHK, pesangon, kontrak kerja, pengaduan Disnaker</p></div>${tabs(['Kalkulator Pesangon','Telaah Kontrak','Template Disnaker'],'kerjaTab')}<div class="scroll pad">${b}</div></div>`};
+function hitung(){const g=+k1.value||0,tj=+k2.value||0,th=+k3.value||0,j=k4.value;const base=g+tj;
+ const mult=th<1?1:Math.min(9,Math.floor(th)+1);
+ const upmk=th<3?0:th<6?2:th<9?3:th<12?4:th<15?5:th<18?6:th<21?7:th<24?8:10;
+ const f={'Efisiensi':.5,'Perampingan':1,'PHK Biasa':1,'Pensiun':1.75,'Penutupan Perusahaan':.5}[j];
+ const pes=base*mult*f, up=base*upmk, hak=(pes+up)*.15, tot=pes+up+hak, r=n=>'Rp '+Math.round(n).toLocaleString('id-ID');
+ $('#hasil').innerHTML=`<div class="res"><div>Uang pesangon: ${r(pes)}</div><div>Uang penghargaan masa kerja: ${r(up)}</div><div>Penggantian hak (15%): ${r(hak)}</div><strong>Estimasi total ${r(tot)}</strong><small style="color:#4b7a5a">Perhitungan ilustrasi untuk demo, bukan hitungan resmi.</small></div>`}
+
+// konsumen kdrt
+pages['/konsumen-kdrt']=()=>{const t=state.konsTab;let b='';
+ if(t==='Konsumen')b=`<p style="font-size:11px;color:var(--muted);margin-bottom:10px">Dilindungi oleh UU No. 8/1999 tentang Perlindungan Konsumen</p>${[['🛒','Penipuan Belanja Online','Barang tidak sesuai, tidak dikirim, atau penjual tidak bisa dihubungi setelah pembayaran.'],['💳','Transaksi Tidak Sah','Tagihan yang tidak Anda lakukan, pembebanan biaya tersembunyi, atau auto-subscribe tanpa izin.'],['🏠','Sengketa Sewa / Developer','Kontrak sewa dilanggar, developer tidak menyelesaikan unit, atau pengembalian DP tidak dilakukan.'],['⚕️','Sengketa Layanan','Kelalaian layanan, produk cacat, atau jasa yang tidak sesuai perjanjian.']].map(([e,h,d])=>`<div class="card" style="display:flex;gap:12px;margin-bottom:10px"><div style="font-size:26px">${e}</div><div><div class="t">${h}</div><p style="font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5">${d}</p></div></div>`).join('')}${cta(`<button class="btn" onclick="go('/surat')">Buat Surat Keberatan Konsumen</button>`)}`;
+ if(t==='KDRT')b=`<div class="emg"><span>🚨</span><div>Jika Anda dalam bahaya langsung, segera hubungi <b>112</b> (darurat) atau <b>1500-454</b> (SAPA Kementerian PPPA).</div></div><p class="t" style="margin:14px 0 8px">Kontak Darurat &amp; Layanan</p><div class="card">${[['Hotline SAPA (PPPA)','1500-454'],['Darurat Nasional','112'],['Komnas Perempuan','021-3903963'],['LBH APIK','021-8714765']].map(([a,b])=>`<div class="row"><span>${a}</span><b>${b}</b></div>`).join('')}</div>${[['Hak-hak korban KDRT','UU No. 23/2004 tentang Penghapusan Kekerasan Dalam Rumah Tangga melindungi Anda.'],['Cara membuat laporan polisi','Laporan bisa dibuat di Polsek/Polres terdekat. Didampingi oleh perempuan jika tersedia.'],['Visum et Repertum','Bukti medis yang diperlukan untuk proses hukum. Minta segera setelah kejadian.']].map(([h,d])=>`<div class="card" style="display:flex;gap:12px;margin-top:10px"><div style="font-size:22px">📚</div><div><div class="t">${h}</div><p style="font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5">${d}</p></div></div>`).join('')}${cta(`<button class="btn acc" onclick="go('/advokat')">Konsultasi Advokat Segera</button>`)}`;
+ return `<div class="view">${sub('Konsumen & KDRT','/layanan','Perlindungan Konsumen & Keluarga')}<div class="nh" style="padding-top:0"><p style="margin:0">Penipuan online, transaksi, dan perlindungan keluarga</p></div>${tabs(['Konsumen','KDRT'],'konsTab')}<div class="scroll pad">${b}</div></div>`};
+
+// waris tanah
+pages['/waris-tanah']=()=>`<div class="view">${sub('Waris & Tanah','/layanan','Sengketa keluarga, sertifikat, girik, warisan')}<div class="scroll pad"><div class="warn">Perkara waris yang melibatkan sengketa antar ahli waris memerlukan pendampingan advokat berlisensi. BELA membantu triase dan persiapan dokumen.</div><p class="t" style="margin:16px 0 8px">Panduan Hukum</p>${[['📜','Tanah Girik & Sertifikasi','Girik bukan bukti kepemilikan penuh. Pelajari cara mensertifikasi tanah girik dan langkah jika disengketakan.'],['👨‍👩‍👧‍👦','Pembagian Warisan','Warisan memerlukan persetujuan seluruh ahli waris. Pelajari cara membuat surat keterangan waris.'],['🔒','Blokir Tanah Sengketa','Jika tanah akan dijual pihak lain tanpa izin, Anda bisa mengajukan pemblokiran ke BPN.'],['📑','Surat Keterangan Waris','Dokumen wajib untuk mengurus aset warisan: tanah, rekening, kendaraan.']].map(([e,h,d])=>`<div class="card" style="display:flex;gap:12px;margin-bottom:10px"><div style="font-size:26px">${e}</div><div><div class="t">${h}</div><p style="font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5">${d}</p></div></div>`).join('')}
+<p class="t" style="margin:16px 0 8px">📂 Dokumen yang Perlu Disiapkan</p><div class="card">${['Girik / Letter C asli','SPPT PBB tahun terakhir','Akta kematian pewaris','Kartu Keluarga terbaru','KTP seluruh ahli waris','Surat keterangan waris (jika ada)'].map(x=>`<div class="chk"><i>✓</i>${x}</div>`).join('')}</div>${cta(`<button class="btn" onclick="go('/advokat')">Konsultasi Advokat — Rp 150.000</button>`,`<button class="btn o" onclick="go('/tanya')">Tanya BELA dulu</button>`)}</div></div>`;
+
+// bekal
+pages['/bekal']=()=>{const i=state.article;
+ if(i!==null&&i!==undefined){const a=articles[i];return `<div class="view"><div class="nh"><div class="back"><button onclick="state.article=null;render()">←</button><h1>Bekal Hukum</h1></div></div><div class="scroll pad"><span class="tag ${a.g?'g':''}">${a.tag}</span><h2 style="font-size:19px;font-weight:800;margin:10px 0 4px;line-height:1.35">${a.t}</h2><p style="font-size:11px;color:var(--faint)">${a.date} · ${a.read}</p><p style="font-size:14px;line-height:1.7;color:var(--body);margin-top:16px">${a.d}</p>${cta(`<button class="btn" onclick="go('/tanya')">Tanya BELA lebih lanjut</button>`,`<button class="btn o" onclick="go('/advokat')">Konsultasi Advokat</button>`)}</div></div>`}
+ return `<div class="view">${sub('Bekal Hukum','/layanan','Satu bekal hukum setiap hari')}<div class="nh" style="padding-top:0"><p style="margin:0">Konten harian untuk semua pelanggan aktif BELA</p></div><div class="scroll pad">${articles.map((a,i)=>`<button class="art" onclick="state.article=${i};render()"><div class="th">📖</div><div class="bd"><span class="tag ${a.g?'g':''}">${a.tag} · ${a.read}</span><h4>${a.t}</h4><time>${a.date}</time></div><span class="go">›</span></button>`).join('')}</div></div>`};
+
+// advokat
+pages['/advokat']=()=>`<div class="view">${sub('Konsultasi Advokat','/layanan')}<div class="scroll pad"><div class="card" style="text-align:center"><small style="font-size:10px;font-weight:800;color:var(--accent);letter-spacing:.08em">MITRA ADVOKAT RESMI BELA</small><img src="${IMG(32)}" width="64" style="margin:10px auto 6px;display:block"><h2 style="font-size:17px;font-weight:800">Joseph Harianja &amp; Partners</h2><p style="font-size:12px;color:var(--muted)">Advocates &amp; Legal Consultant · Bekasi Selatan</p></div>
+<p class="t" style="margin:16px 0 8px">Profil &amp; Wewenang</p><div class="card">${[['✅','Advokat berlisensi resmi — terdaftar PERADI'],['📋','Penanggung jawab hukum atas seluruh perkara BELA'],['🔒','Identitas dan nomor izin ditampilkan sebelum sesi dimulai'],['💼','Berpengalaman di bidang ketenagakerjaan, properti, dan sengketa keluarga']].map(([e,t])=>`<div class="chk"><span>${e}</span>${t}</div>`).join('')}</div>
+<div class="warn" style="margin-top:14px">⚖️ <b>Catatan penting</b><br>Nasihat hukum yang mengikat hanya keluar dari advokat JHP, dengan identitas dan nomor izin ditampilkan. Keluaran AI BELA dilabeli tegas sebagai informasi hukum, bukan nasihat hukum.</div>
+<div class="price"><span>per sesi 30 menit<br><small style="color:var(--muted)">Pembayaran online via aplikasi BELA · Di luar tagihan pulsa Indosat</small></span><b>Rp 150.000</b></div><button class="btn" onclick="toast('Jadwalkan Konsultasi')">Jadwalkan Konsultasi</button></div></div>`;
+
+// paket
+pages['/paket']=()=>{const p=[[13,'BELA Harian','10 pertanyaan total','Rp1.000','/hari'],[14,'BELA 2 Hari','25 pertanyaan total','Rp3.500','/2 hari'],[15,'BELA Mingguan','100 pertanyaan total','Rp9.900','/minggu'],[16,'BELA Bulanan','500 pertanyaan total','Rp29.000','/bulan']];
+ return `<div class="view">${sub('Paket BELA','/layanan')}<div class="nh" style="padding-top:0"><div class="sub2" style="margin-top:0">Pilih Paket BELA Anda</div><p>Bayar via aplikasi pembayaran favorit Anda. Aktif otomatis setelah bayar.</p></div><div class="scroll pad" style="padding-top:18px">${p.map(([im,n,q,pr,per],i)=>`<button class="plan ${i===3?'pop':''}" onclick="toast('Beli ${n} — ${pr}')">${i===3?'<span class="badge">👑 Paling Populer</span>':''}<img src="${IMG(im)}"><div><b>${n}</b><br><span class="q">${q}</span></div><div class="pr"><strong>${pr}</strong><small>${per}</small><div class="go2">›</div></div></button>`).join('')}<div class="note">ℹ️ Sesi advokat tidak termasuk dalam paket mana pun. Konsultasi advokat selalu dirujuk dan ditagih terpisah — Rp 150.000 / 30 menit.</div></div></div>`};
+
+// ---- router ----
+function route(){const h=location.hash.replace(/^#/,'')||'/';return pages[h]?h:'/'}
+function go(p){location.hash=p}
+function render(){const p=route();$('#app').innerHTML=pages[p]();}
+window.addEventListener('hashchange',()=>{const p=route();if(p!=='/bekal')state.article=null;if(p!=='/surat'){state.suratStep=1;state.suratType=null}state.sheet=null;render()});
+render();
+</script>
+</body>
+</html>
