@@ -37,7 +37,7 @@ export default function PidanaRingan() {
             </div>
             <div>
               <div className="t">{h}</div>
-              <p style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
+              <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
             </div>
           </div>
         ))}
@@ -59,7 +59,7 @@ export default function PidanaRingan() {
             Tanya BELA tentang kasus saya
           </Link>
           <Link className="btn o" href="/advokat">
-            Konsultasi Advokat — Rp 150.000
+            Konsultasi Advokat — Rp150.000
           </Link>
         </div>
         <div className="stamp">

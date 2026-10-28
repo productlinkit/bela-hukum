@@ -33,7 +33,7 @@ export default function Masuk() {
           Masuk dengan Google
         </Link>
 
-        <p style={{ fontSize: 11.5, color: "var(--faint)", textAlign: "center", marginTop: 16, lineHeight: 1.6, maxWidth: 320, marginInline: "auto" }}>
+        <p style={{ fontSize: 12, color: "var(--faint)", textAlign: "center", marginTop: 16, lineHeight: 1.6, maxWidth: 320, marginInline: "auto" }}>
           Dengan masuk, Anda menyetujui <b>Syarat &amp; Ketentuan</b> dan <b>Kebijakan Privasi</b> BELA.
         </p>
       </main>

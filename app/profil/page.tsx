@@ -192,7 +192,7 @@ export default function Profil() {
           <div className="bar">
             <i />
           </div>
-          <div style={{ fontSize: 11, color: "var(--faint)", marginTop: 6 }}>
+          <div style={{ fontSize: 12, color: "var(--faint)", marginTop: 6 }}>
             {quota.left} dari {quota.total} pertanyaan tersisa hari ini
           </div>
         </div>

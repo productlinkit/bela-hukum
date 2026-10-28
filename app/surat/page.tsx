@@ -76,7 +76,7 @@ ${f.f1 || "[Nama Anda]"}`;
         {step === 1 && (
           <>
             <p className="t">Pilih Jenis Surat</p>
-            <p style={{ fontSize: 11, color: "var(--muted)", margin: "3px 0 12px" }}>
+            <p style={{ fontSize: 12, color: "var(--muted)", margin: "3px 0 12px" }}>
               Rp25.000 / surat — metode pembayaran dipilih saat transaksi
             </p>
             {types.map(([e, t, d]) => (

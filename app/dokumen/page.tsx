@@ -59,7 +59,7 @@ export default function Dokumen() {
           {file ? (
             <>
               <b style={{ fontSize: 13 }}>{file}</b>
-              <span style={{ fontSize: 11.5, color: "var(--muted)" }}>Ketuk untuk ganti dokumen</span>
+              <span style={{ fontSize: 12, color: "var(--muted)" }}>Ketuk untuk ganti dokumen</span>
             </>
           ) : (
             <>

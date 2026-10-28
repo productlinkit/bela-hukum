@@ -68,7 +68,7 @@ export default function PenipuanDigital() {
                   </div>
                   <div>
                     <div className="t">{h}</div>
-                    <p style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
+                    <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
                   </div>
                 </div>
               ))}
@@ -112,7 +112,7 @@ export default function PenipuanDigital() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn o" href="/surat">
-                  Buat surat pengaduan — Rp 25.000
+                  Buat surat pengaduan — Rp25.000
                 </Link>
               </div>
             </>
@@ -120,7 +120,7 @@ export default function PenipuanDigital() {
 
           {tab === "Hak Anda" && (
             <>
-              <p style={{ fontSize: 11.5, color: "var(--muted)", marginBottom: 10 }}>
+              <p style={{ fontSize: 12, color: "var(--muted)", marginBottom: 10 }}>
                 Berdasarkan UU No. 1/2024 (perubahan UU ITE) &amp; UU No. 27/2022 (PDP)
               </p>
               <div className="card">
@@ -133,7 +133,7 @@ export default function PenipuanDigital() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn o" href="/advokat">
-                  Konsultasi Advokat — Rp 150.000/30 menit
+                  Konsultasi Advokat — Rp150.000/30 menit
                 </Link>
               </div>
               <Stamp />

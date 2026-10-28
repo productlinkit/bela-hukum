@@ -45,7 +45,7 @@ export default function Advokat() {
       <SubHeader title="Konsultasi Advokat" backHref="/" />
       <main className="scroll pad" id="main">
         <div className="card" style={{ textAlign: "center" }}>
-          <small style={{ fontSize: 11, fontWeight: 800, color: "var(--accent-ink)", letterSpacing: ".08em" }}>
+          <small style={{ fontSize: 12, fontWeight: 800, color: "var(--accent-ink)", letterSpacing: ".08em" }}>
             MITRA ADVOKAT RESMI BELA
           </small>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -86,7 +86,7 @@ export default function Advokat() {
               Pembayaran online via aplikasi BELA · metode pembayaran dipilih saat transaksi
             </small>
           </span>
-          <b>Rp 150.000</b>
+          <b>Rp150.000</b>
         </div>
         <button className="btn" onClick={() => setSched(true)}>
           Jadwalkan Konsultasi
@@ -144,14 +144,14 @@ export default function Advokat() {
           )}
 
           <button className="btn" style={{ marginTop: 16 }} onClick={submit}>
-            Lanjut ke Pembayaran — Rp 150.000
+            Lanjut ke Pembayaran — Rp150.000
           </button>
         </Sheet>
       )}
 
       {pay && (
         <PaymentSheet
-          amount="Rp 150.000"
+          amount="Rp150.000"
           title="Pembayaran Konsultasi"
           onClose={() => setPay(false)}
         />

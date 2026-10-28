@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         </div>
         <p className="hello">Selamat datang,</p>
-        <h1 className="name">{user.name} 👋</h1>
+        <h1 className="name">{user.name}</h1>
       </header>
 
       <main className="scroll pad" id="main" style={{ paddingTop: 8 }}>

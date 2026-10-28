@@ -39,7 +39,7 @@ export default function TanahProperti() {
             </div>
             <div>
               <div className="t">{h}</div>
-              <p style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
+              <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
             </div>
           </div>
         ))}
@@ -58,7 +58,7 @@ export default function TanahProperti() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
           <Link className="btn" href="/advokat">
-            Konsultasi Advokat — Rp 150.000
+            Konsultasi Advokat — Rp150.000
           </Link>
           <Link className="btn o" href="/tanya">
             Tanya BELA dulu

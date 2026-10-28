@@ -22,7 +22,7 @@ export default function Konsumen() {
     <div className="view">
       <SubHeader title="Konsumen" subtitle="Perlindungan Konsumen" backHref="/" />
       <main className="scroll pad" id="main">
-        <p style={{ fontSize: 11.5, color: "var(--muted)", marginBottom: 10 }}>
+        <p style={{ fontSize: 12, color: "var(--muted)", marginBottom: 10 }}>
           Dilindungi oleh UU No. 8/1999 tentang Perlindungan Konsumen
         </p>
         {cards.map(([e, h, d]) => (
@@ -32,7 +32,7 @@ export default function Konsumen() {
             </div>
             <div>
               <div className="t">{h}</div>
-              <p style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
+              <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
             </div>
           </div>
         ))}

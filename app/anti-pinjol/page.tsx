@@ -86,10 +86,29 @@ export default function AntiPinjol() {
                   <div>
                     <small style={{ color: "var(--accent-ink)", fontWeight: 800 }}>LANGKAH {i + 1}</small>
                     <div className="t">{h}</div>
-                    <p style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
+                    <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3, lineHeight: 1.5 }}>{d}</p>
                   </div>
                 </div>
               ))}
+              {/* [UX/Help] One-tap official channels right on the Panduan tab */}
+              <div className="sec">
+                <h2 style={{ fontSize: 14 }}>Hubungi Kanal Resmi</h2>
+              </div>
+              <div className="card">
+                {kontak.map((k) => (
+                  <div key={k.label} className="row">
+                    <span>{k.label}</span>
+                    <a
+                      className="lnk"
+                      href={k.href}
+                      target={k.href.startsWith("http") ? "_blank" : undefined}
+                      rel={k.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {k.display}
+                    </a>
+                  </div>
+                ))}
+              </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn" href="/tanya">
                   Tanya BELA tentang kasus saya
@@ -118,7 +137,7 @@ export default function AntiPinjol() {
               <div className="letter">{templateLaporan}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn" href="/surat">
-                  Buat surat pengaduan lengkap — Rp 25.000
+                  Buat surat pengaduan lengkap — Rp25.000
                 </Link>
               </div>
               <div className="sec">
@@ -145,7 +164,7 @@ export default function AntiPinjol() {
           {tab === "Hak Anda" && (
             <>
               {/* [P1] Citation corrected to the fintech-lending rule */}
-              <p style={{ fontSize: 11, color: "var(--muted)", marginBottom: 10 }}>
+              <p style={{ fontSize: 12, color: "var(--muted)", marginBottom: 10 }}>
                 Berdasarkan POJK No. 10/POJK.05/2022 (LPBBTI) &amp; UU No. 27/2022 (PDP)
               </p>
               <div className="card">
@@ -158,7 +177,7 @@ export default function AntiPinjol() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn o" href="/advokat">
-                  Konsultasi Advokat — Rp 150.000/30 menit
+                  Konsultasi Advokat — Rp150.000/30 menit
                 </Link>
               </div>
               <Stamp />

@@ -9,6 +9,7 @@ export type Plan = {
   price: string;
   period: string; // e.g. "/hari"
   quota: string; // human-readable quota, one phrasing everywhere
+  perDay?: string; // per-day equivalent so plans compare at a glance
   benefits: string[];
   current?: boolean;
   featured?: boolean;
@@ -32,6 +33,7 @@ export const plans: Plan[] = [
     price: "Rp1.000",
     period: "/hari",
     quota: "50 pertanyaan / hari",
+    perDay: "setara Rp1.000/hari",
     benefits: ["Semua fitur BELA Gratis", "50 pertanyaan per hari"],
     img: 14,
   },
@@ -41,6 +43,7 @@ export const plans: Plan[] = [
     price: "Rp9.900",
     period: "/minggu",
     quota: "150 pertanyaan / minggu",
+    perDay: "setara Rp1.414/hari",
     benefits: ["Semua fitur BELA Gratis", "150 pertanyaan per minggu", "1× review dokumen"],
     img: 15,
   },
@@ -50,6 +53,7 @@ export const plans: Plan[] = [
     price: "Rp29.000",
     period: "/bulan",
     quota: "500 pertanyaan / bulan",
+    perDay: "setara Rp967/hari",
     benefits: ["Semua fitur BELA Gratis", "500 pertanyaan per bulan", "3× review dokumen"],
     featured: true,
     img: 16,
@@ -63,4 +67,4 @@ export const upgradeTarget = plans.find((p) => p.featured)!;
 export const quota = { left: 10, total: 10, unit: "hari" as const };
 
 // Advocate sessions are billed separately from any plan.
-export const advocateFee = "Rp 150.000 / 30 menit";
+export const advocateFee = "Rp150.000 / 30 menit";

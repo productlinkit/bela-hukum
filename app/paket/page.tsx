@@ -41,6 +41,7 @@ export default function Paket() {
                 <b>{p.name}</b>
                 <br />
                 <span className="q">{p.quota}</span>
+                {p.perDay && <small className="perday">{p.perDay}</small>}
               </div>
               <div className="pr">
                 <strong>{p.price}</strong>
@@ -109,7 +110,7 @@ export default function Paket() {
                 {confirm.period}
               </b>
             </div>
-            <p style={{ fontSize: 11.5, color: "var(--muted)" }}>
+            <p style={{ fontSize: 12, color: "var(--muted)" }}>
               Pembayaran diproses lewat metode yang Anda pilih di aplikasi. Paket aktif otomatis setelah pembayaran
               berhasil.
             </p>

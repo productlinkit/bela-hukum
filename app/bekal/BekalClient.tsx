@@ -24,7 +24,7 @@ export default function BekalClient({ initial }: { initial: number | null }) {
         <main className="scroll pad" id="main">
           <span className={`tag ${a.g ? "g" : ""}`}>{a.tag}</span>
           <h2 style={{ fontSize: 19, fontWeight: 800, margin: "10px 0 4px", lineHeight: 1.35 }}>{a.t}</h2>
-          <p style={{ fontSize: 11, color: "var(--faint)" }}>
+          <p style={{ fontSize: 12, color: "var(--faint)" }}>
             {a.date} · {a.read}
           </p>
           <p style={{ fontSize: 14, lineHeight: 1.7, color: "var(--body)", marginTop: 16 }}>{a.d}</p>

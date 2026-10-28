@@ -138,7 +138,7 @@ export default function Ketenagakerjaan() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
                 <Link className="btn" href="/dokumen">
-                  Review Kontrak Kerja — Rp 15.000
+                  Review Kontrak Kerja — Rp15.000
                 </Link>
               </div>
             </>

@@ -10,7 +10,7 @@ const services: Svc[] = [
   ["message", "Tanya BELA", "AI legal assistant — triase & langkah pertama", "Termasuk semua paket", "/tanya"],
   ["file", "Review Dokumen", "Analisis kontrak & surat, penandaan klausul berisiko", "Rp15.000 / dokumen", "/dokumen"],
   ["clipboard", "Draft Surat", "Somasi & surat resmi siap kirim", "Rp25.000 / surat", "/surat"],
-  ["calendar", "Konsultasi Advokat", "Sesi 30 menit dengan advokat berlisensi", "Rp 150.000 · ditagih terpisah", "/advokat"],
+  ["calendar", "Konsultasi Advokat", "Sesi 30 menit dengan advokat berlisensi", "Rp150.000 · ditagih terpisah", "/advokat"],
   ["book", "Bekal Hukum", "Satu bekal hukum setiap hari", "Termasuk semua paket", "/bekal"],
 ];
 

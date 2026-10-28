@@ -16,6 +16,8 @@ export default function Sheet({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Remember the trigger so focus returns to it when the dialog closes.
+    const opener = document.activeElement as HTMLElement | null;
     const el = ref.current;
     const first = el?.querySelector<HTMLElement>(
       'button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])'
@@ -25,7 +27,10 @@ export default function Sheet({
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      opener?.focus?.();
+    };
   }, [onClose]);
 
   return (

@@ -32,6 +32,7 @@ export default function Tanya() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [draft, setDraft] = useState("");
   const [source, setSource] = useState<string | null>(null);
+  const [welcomeTime, setWelcomeTime] = useState("");
   const chatRef = useRef<HTMLElement>(null);
   const idRef = useRef(0);
   const started = msgs.length > 0;
@@ -40,6 +41,12 @@ export default function Tanya() {
     const el = chatRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [msgs]);
+
+  // [UX] Live welcome timestamp (set after mount to stay hydration-safe)
+  useEffect(() => {
+    const d = new Date();
+    setWelcomeTime(`${String(d.getHours()).padStart(2, "0")}.${String(d.getMinutes()).padStart(2, "0")}`);
+  }, []);
 
   const ask = (q: string, isRetry = false) => {
     const question = q.trim();
@@ -93,7 +100,7 @@ export default function Tanya() {
             <br />
             <br />
             Apa yang ingin Anda tanyakan hari ini?
-            <time>09.00</time>
+            <time suppressHydrationWarning>{welcomeTime}</time>
           </div>
         </div>
 
