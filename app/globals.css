@@ -298,14 +298,16 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--dang
 .bub.err{background:var(--dbg);color:var(--dt);border:1px solid var(--db)}
 .retry{margin-top:8px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--primary)}
 
-/* [Interactive icons] feature tiles get an app-icon look: white rounded
-   chip + category-colored glyph, with a lift on hover. */
-.svc{gap:10px}
-.svc .svcico{display:grid;place-items:center;width:52px;height:52px;border-radius:15px;background:#fff;box-shadow:0 3px 8px rgba(15,23,42,.1);transition:transform .15s}
-.svc:hover .svcico{transform:translateY(-1px) scale(1.04)}
-.svc .svcico svg{width:28px;height:28px;stroke-width:2}
+/* [3D icons] feature grid reads as an app-icon grid — the illustrated icons
+   bring their own tile + color, so cells are transparent (no card frame). */
+.svc{gap:9px;background:transparent;box-shadow:none;height:auto;min-height:106px;padding:8px 4px}
+.svc:hover{transform:translateY(-3px)}
+.svc .svcimg{width:62px !important;height:62px !important;object-fit:contain;transition:transform .15s}
+.svc:hover .svcimg{transform:scale(1.04)}
 .li .ic{color:var(--primary)}
 .li .ic svg{stroke-width:2}
+.li .ic.img3d{background:transparent}
+.li .ic.img3d img{width:42px;height:42px;object-fit:contain}
 
 /* Sheet header + close */
 .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}

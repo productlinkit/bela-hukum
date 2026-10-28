@@ -24,8 +24,9 @@ export default function Layanan() {
         </p>
         {features.map((f) => (
           <Link key={f.href} className="li" href={f.href}>
-            <div className="ic" aria-hidden="true" style={{ color: f.color, background: `${f.color}18` }}>
-              <Icon name={f.icon} size={24} />
+            <div className="ic img3d" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={f.img} alt="" />
             </div>
             <div>
               <b>{f.label}</b>

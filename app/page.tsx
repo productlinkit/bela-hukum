@@ -63,10 +63,9 @@ export default function Home() {
 
         <div className="grid">
           {features.map((f) => (
-            <Link key={f.href} className={`svc ${f.cls}`} href={f.href}>
-              <span className="svcico" aria-hidden="true" style={{ color: f.color }}>
-                <Icon name={f.icon} size={28} />
-              </span>
+            <Link key={f.href} className="svc" href={f.href}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="svcimg" src={f.img} alt="" />
               <span>{f.label}</span>
             </Link>
           ))}
