@@ -397,10 +397,11 @@ body{overflow-x:hidden;overflow-wrap:break-word}
 /* ===== Desktop (≥900px): real 2-column layout — sidebar + wide content ===== */
 .sidebar{display:none}
 @media (min-width:900px){
-  body{background:#e6ebf3}
-  .app{flex-direction:row;max-width:1240px;width:100%;height:100dvh;margin-inline:auto;box-shadow:0 0 0 1px rgba(15,23,42,.08),0 16px 60px rgba(15,23,42,.14)}
+  body{background:#fff}
+  /* Full-width desktop: app and content fill the viewport, no side gutters */
+  .app{flex-direction:row;max-width:none;width:100%;height:100dvh;margin:0;box-shadow:none}
   .sidebar{display:flex;flex-direction:column;width:248px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:18px 14px;overflow-y:auto}
-  .view{flex:1;min-width:0;max-width:880px;margin-inline:auto;border-inline:1px solid var(--line2)}
+  .view{flex:1;min-width:0;max-width:none;margin:0;border:0}
   .nav{display:none}                 /* mobile bottom nav hidden on desktop */
   /* headers/composer no longer need device safe-area padding on desktop */
   .top,.nh,.pf{padding-top:14px}
