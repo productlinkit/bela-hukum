@@ -445,3 +445,10 @@ body{overflow-x:hidden;overflow-wrap:break-word}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .svc:hover,.svc:hover .svcimg,.upg:hover .upg-cta{transform:none!important}
 }
+
+/* Featured (navy) plan card: light text + white CTA so nothing dims out */
+.plan.pop .benefits span{color:#e2ecff}
+.plan.pop .benefits span i{color:#fcd34d}
+.plan.pop .perday{color:#c3dbff}
+.plan.pop .btn{background:#fff;color:var(--primary)}
+.plan.pop .btn:hover{background:#f1f5ff}
