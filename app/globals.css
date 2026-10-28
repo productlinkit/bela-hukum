@@ -60,7 +60,7 @@ a{color:inherit;text-decoration:none}
 .upg-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
 .upg-price{display:flex;align-items:baseline;gap:5px}
 .upg-price strong{font-size:23px;font-weight:800}
-.upg-price span{font-size:12px;color:var(--soft)}
+.upg-price span{font-size:12px;color:#c3dbff}
 .upg-cta{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--primary);font-weight:800;font-size:14px;padding:11px 16px;border-radius:12px;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,.22)}
 .upg:hover .upg-cta{transform:translateY(-1px)}
 .upg-cta{transition:transform .15s}
@@ -427,4 +427,20 @@ body{overflow-x:hidden;overflow-wrap:break-word}
   .hero h2{font-size:19px}
   .bub{max-width:88%}
   .li{padding:12px}
+}
+
+/* ===== v1.2 feedback: pop-up polish, reduced motion, undo snackbar ===== */
+/* Blurred backdrop + drag handle on every sheet */
+.ov{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.grabber{width:40px;height:4px;border-radius:99px;background:var(--line);margin:2px auto 12px}
+/* [2.5.8 comfort] Riwayat edit/delete → 44×44 */
+.hist .hact button{width:44px;height:44px}
+/* Undo snackbar (delete → reversible) */
+.snackbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(74px + env(safe-area-inset-bottom));width:min(460px,calc(100% - 24px));z-index:60;display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 10px 28px rgba(15,23,42,.34);animation:u .2s}
+.snackbar span{flex:1;font-size:13px}
+.snackbar button{font-weight:800;color:#fcd34d;font-size:13px;padding:6px 8px;min-height:32px}
+/* Respect users who reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .svc:hover,.svc:hover .svcimg,.upg:hover .upg-cta{transform:none!important}
 }

@@ -32,6 +32,32 @@ export default function PaymentSheet({
 }) {
   const [sel, setSel] = useState<string | null>(null);
   const [paid, setPaid] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  // [UX Error Recovery] Failed-payment state with retry (e.g. offline).
+  if (failed) {
+    return (
+      <Sheet title="Pembayaran Gagal" onClose={onClose}>
+        <div style={{ textAlign: "center", padding: "8px 0 4px" }} role="alert">
+          <div className="cico red" style={{ width: 56, height: 56, borderRadius: "50%", margin: "0 auto 12px" }}>
+            <Icon name="alert" size={28} />
+          </div>
+          <p style={{ fontSize: 14, fontWeight: 700 }}>Pembayaran gagal</p>
+          <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 4 }}>
+            Periksa koneksi internet Anda, lalu coba lagi. Tidak ada dana yang terpotong.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 14 }}>
+          <button className="btn" onClick={() => setFailed(false)}>
+            Coba Lagi
+          </button>
+          <button className="btn o" onClick={onClose}>
+            Batal
+          </button>
+        </div>
+      </Sheet>
+    );
+  }
 
   if (paid) {
     return (
@@ -102,6 +128,10 @@ export default function PaymentSheet({
         style={{ marginTop: 16 }}
         disabled={!sel}
         onClick={() => {
+          if (typeof navigator !== "undefined" && navigator.onLine === false) {
+            setFailed(true);
+            return;
+          }
           setPaid(true);
           onPaid?.();
         }}

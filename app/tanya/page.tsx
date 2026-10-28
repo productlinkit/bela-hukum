@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import SubHeader from "@/components/SubHeader";
 import Icon from "@/components/Icon";
+import Sheet from "@/components/Sheet";
 
 type Msg = {
   id: number;
@@ -137,6 +138,7 @@ export default function Tanya() {
                   className={`bub ${m.me ? "me" : ""} ${m.error ? "err" : ""}`}
                   aria-busy={m.thinking || undefined}
                   aria-label={m.thinking ? "BELA sedang mengetik" : undefined}
+                  role={m.error ? "alert" : undefined}
                 >
                   {m.thinking ? (
                     <span className="dots" aria-hidden="true">
@@ -194,32 +196,21 @@ export default function Tanya() {
       </form>
 
       {source && (
-        <div
-          className="ov"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Dasar hukum"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setSource(null);
-          }}
-        >
-          <div className="sheet">
-            <h3>Dasar Hukum</h3>
-            <h5>{source}</h5>
-            <p>
-              Ini kutipan rujukan versi demo. Di aplikasi asli, chip ini membuka bunyi pasal lengkap beserta tautan ke
-              sumber resmi (mis. peraturan.go.id) sehingga Anda bisa memverifikasi sendiri.
-            </p>
-            <p style={{ marginTop: 10 }}>
-              <a className="lnk" href="https://peraturan.go.id" target="_blank" rel="noopener noreferrer">
-                Buka sumber resmi ↗
-              </a>
-            </p>
-            <button className="btn" style={{ marginTop: 16 }} onClick={() => setSource(null)}>
-              Tutup
-            </button>
-          </div>
-        </div>
+        <Sheet title="Dasar Hukum" onClose={() => setSource(null)}>
+          <h5>{source}</h5>
+          <p>
+            Ini kutipan rujukan versi demo. Di aplikasi asli, chip ini membuka bunyi pasal lengkap beserta tautan ke
+            sumber resmi (mis. peraturan.go.id) sehingga Anda bisa memverifikasi sendiri.
+          </p>
+          <p style={{ marginTop: 10 }}>
+            <a className="lnk" href="https://peraturan.go.id" target="_blank" rel="noopener noreferrer">
+              Buka sumber resmi ↗
+            </a>
+          </p>
+          <button className="btn" style={{ marginTop: 16 }} onClick={() => setSource(null)}>
+            Tutup
+          </button>
+        </Sheet>
       )}
     </div>
   );

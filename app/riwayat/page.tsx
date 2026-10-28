@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import SubHeader from "@/components/SubHeader";
 import BottomNav from "@/components/BottomNav";
 import Tabs, { tabId } from "@/components/Tabs";
@@ -21,6 +21,8 @@ export default function Riwayat() {
   const [tab, setTab] = useState(TABS[0]);
   const [convs, setConvs] = useState<Conv[]>(seed);
   const [q, setQ] = useState("");
+  const [undo, setUndo] = useState<{ conv: Conv; index: number } | null>(null);
+  const undoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const filtered = useMemo(
     () => convs.filter((c) => c.title.toLowerCase().includes(q.trim().toLowerCase())),
@@ -31,9 +33,24 @@ export default function Riwayat() {
     const name = typeof window !== "undefined" ? window.prompt("Ubah nama percakapan", c.title) : null;
     if (name && name.trim()) setConvs((prev) => prev.map((x) => (x.id === c.id ? { ...x, title: name.trim() } : x)));
   };
+
+  // [UX] Delete is reversible: remove immediately, offer Undo for 6s.
   const remove = (c: Conv) => {
-    if (typeof window !== "undefined" && window.confirm(`Hapus "${c.title}"?`))
-      setConvs((prev) => prev.filter((x) => x.id !== c.id));
+    const index = convs.findIndex((x) => x.id === c.id);
+    setConvs((prev) => prev.filter((x) => x.id !== c.id));
+    setUndo({ conv: c, index });
+    if (undoTimer.current) clearTimeout(undoTimer.current);
+    undoTimer.current = setTimeout(() => setUndo(null), 6000);
+  };
+  const doUndo = () => {
+    if (!undo) return;
+    setConvs((prev) => {
+      const next = [...prev];
+      next.splice(Math.min(undo.index, next.length), 0, undo.conv);
+      return next;
+    });
+    setUndo(null);
+    if (undoTimer.current) clearTimeout(undoTimer.current);
   };
 
   return (
@@ -89,6 +106,14 @@ export default function Riwayat() {
           )}
         </div>
       </main>
+
+      {undo && (
+        <div className="snackbar" role="status">
+          <span>Percakapan dihapus</span>
+          <button onClick={doUndo}>Urungkan</button>
+        </div>
+      )}
+
       <BottomNav />
     </div>
   );

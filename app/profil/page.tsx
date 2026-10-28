@@ -4,10 +4,20 @@ import { useState } from "react";
 import Link from "next/link";
 import BottomNav from "@/components/BottomNav";
 import Icon from "@/components/Icon";
+import Sheet from "@/components/Sheet";
 import { user, toast } from "@/lib/data";
 import { currentPlan, quota } from "@/lib/plans";
 
 type SheetKey = "notif" | "privasi" | "bantuan" | "syarat" | "kebijakan" | "unreg";
+
+const SHEET_TITLES: Record<SheetKey, string> = {
+  notif: "Aktifkan Notifikasi",
+  privasi: "Hapus Akun Permanen",
+  bantuan: "Bantuan",
+  syarat: "Syarat & Ketentuan",
+  kebijakan: "Kebijakan Privasi",
+  unreg: "Kelola Langganan",
+};
 
 const accountMenu: [string, string, string, SheetKey][] = [
   ["bell", "Notifikasi", "Izin & preferensi", "notif"],
@@ -22,7 +32,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "notif":
       return (
         <>
-          <h3>Aktifkan Notifikasi</h3>
           <p>Izinkan notifikasi agar Anda tidak melewatkan hal penting:</p>
           <h5>Status konsultasi advokat</h5>
           <p>Kabar saat jadwal dikonfirmasi atau berubah.</p>
@@ -36,7 +45,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "privasi":
       return (
         <>
-          <h3>Hapus Akun Permanen</h3>
           <p>
             Seluruh data Anda akan dihapus permanen: riwayat percakapan, dokumen yang diunggah, hasil review, draft
             surat, jadwal konsultasi, dan notifikasi. Tindakan ini tidak dapat dibatalkan.
@@ -51,7 +59,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "bantuan":
       return (
         <>
-          <h3>Bantuan</h3>
           <h5>Cara pakai BELA</h5>
           <ul>
             <li>
@@ -88,7 +95,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "syarat":
       return (
         <>
-          <h3>Syarat &amp; Ketentuan</h3>
           <h5>Ringkasan Layanan</h5>
           <p>
             BELA adalah aplikasi layanan informasi hukum digital: informasi hukum umum, telaah dokumen, pembuatan draft
@@ -112,7 +118,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "kebijakan":
       return (
         <>
-          <h3>Kebijakan Privasi</h3>
           <h5>Data yang Kami Kumpulkan</h5>
           <p>
             Nomor HP, nama, dan data yang Anda kirimkan saat memakai layanan (pertanyaan, dokumen yang diunggah, draft
@@ -135,7 +140,6 @@ function SheetBody({ sheet }: { sheet: SheetKey }) {
     case "unreg":
       return (
         <>
-          <h3>Kelola Langganan</h3>
           <p>
             Paket aktif Anda saat ini: <b>BELA Gratis</b>. Paket berbayar bisa dihentikan kapan saja dari sini —
             perpanjangan otomatis akan dimatikan dan sisa kuota tetap berlaku sampai periode berakhir.
@@ -286,21 +290,12 @@ export default function Profil() {
       <BottomNav />
 
       {sheet && (
-        <div
-          className="ov"
-          role="dialog"
-          aria-modal="true"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setSheet(null);
-          }}
-        >
-          <div className="sheet">
-            <SheetBody sheet={sheet} />
-            <button className="btn" style={{ marginTop: 16 }} onClick={() => setSheet(null)}>
-              Tutup
-            </button>
-          </div>
-        </div>
+        <Sheet title={SHEET_TITLES[sheet]} onClose={() => setSheet(null)}>
+          <SheetBody sheet={sheet} />
+          <button className="btn" style={{ marginTop: 16 }} onClick={() => setSheet(null)}>
+            Tutup
+          </button>
+        </Sheet>
       )}
     </div>
   );
