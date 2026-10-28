@@ -300,15 +300,14 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--dang
 
 /* [3D icons] feature grid reads as an app-icon grid — the illustrated icons
    bring their own tile + color, so cells are transparent (no card frame). */
-.svc{gap:9px;background:linear-gradient(140deg,#0d2154 0%,#1a3a6b 55%,#27548f 100%);box-shadow:0 6px 16px rgba(13,33,84,.22);height:auto;min-height:120px;padding:14px 8px;border-radius:16px}
+.svc{gap:9px;background:transparent;box-shadow:none;height:auto;min-height:106px;padding:8px 4px}
 .svc:hover{transform:translateY(-3px)}
-.svc span{color:#fff}
-.svc .svcimg{width:56px !important;height:56px !important;object-fit:contain;transition:transform .15s}
+.svc .svcimg{width:62px !important;height:62px !important;object-fit:contain;transition:transform .15s}
 .svc:hover .svcimg{transform:scale(1.05)}
 .li .ic{color:var(--primary)}
 .li .ic svg{stroke-width:2}
-.li .ic.img3d{background:linear-gradient(140deg,#0d2154,#27548f)}
-.li .ic.img3d img{width:34px;height:34px;object-fit:contain}
+.li .ic.img3d{background:transparent}
+.li .ic.img3d img{width:42px;height:42px;object-fit:contain}
 
 /* Sheet header + close */
 .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -413,8 +412,8 @@ body{overflow-x:hidden;overflow-wrap:break-word}
 @media (max-width:360px){
   .pad{padding-left:12px;padding-right:12px}
   .grid{gap:8px}
-  .svc{min-height:112px;padding:12px 6px}
-  .svc .svcimg{width:50px !important;height:50px !important}
+  .svc{min-height:96px;padding:6px 4px}
+  .svc .svcimg{width:52px !important;height:52px !important}
   .svc span{font-size:10.5px}
   .name{font-size:18px}
   .hero h2{font-size:19px}
